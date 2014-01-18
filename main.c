@@ -3,7 +3,7 @@
  *	Measuring temperature with a thermistor.
  *
  *	@author Pasang Sherpa
- *	@author	Aaron Nelson
+ *  @author Aaron Nelson
  *	@author Jonathan Forbes
  *	@author Takatoshi Tomoyose
  *
@@ -20,7 +20,7 @@
 PI_THREAD( readTemperature) {
 	//Set up the task to sample the A-to-D converter input every 10th second.
 	for (;;) {
-		// Notify the computation task of data available (use a message queue, for example)
+        // Notify the computation task of data available (use a message queue, for example)
 	    // Do nothing until the next reading
 	}
 }
