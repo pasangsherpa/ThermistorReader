@@ -1,13 +1,19 @@
 /*
- * main.h
+ * main.h:
+ *	Measuring temperature with a thermistor.
  *
- *  Created on: Jan 16, 2014
+ *	@author Pasang Sherpa
+ *	@author	Aaron Nelson
+ *	@author Jonathan Forbes
+ *	@author Takatoshi Tomoyose
  *
  */
 
-#ifndef MAIN_H_
-#define MAIN_H_
+#pragma once
 
-
-
-#endif /* MAIN_H_ */
+/********* GENERAL **********/
+#define NO_ERROR			0
+#define ERROR				-1
+#define FALSE 				0
+#define TRUE 				1
+/******* END GENERAL ********/
