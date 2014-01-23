@@ -8,7 +8,10 @@ SRC = main.c
 OBJ = $(SRC:.c=.o)
 BINS = $(SRC:.c=)
 
-main: 	main.o
+run: 	main
+	./main
+
+main: main.o
 	@echo [link]
 	@$(CC) -o $@ main.o $(LDFLAGS) $(LDLIBS)
 	
@@ -16,13 +19,10 @@ main: 	main.o
 	@echo [CC] $<
 	@$(CC) -c $(CFLAGS) $< -o $@
 
-run: 	main
-	./main
-
 clean: 
 	rm -f $(OBJ) *~ core tags $(BINS)
 
-tags: 	$(SRC)
+tags: $(SRC)
 	@echo [ctags]
 	@ctags $(SRC)
 
