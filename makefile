@@ -8,8 +8,8 @@ SRC = main.c
 OBJ = $(SRC:.c=.o)
 BINS = $(SRC:.c=)
 
-run: 	main
-	./main
+run: main
+        ./main
 
 main: main.o
 	@echo [link]
