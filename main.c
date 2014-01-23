@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <wiringPi.h>
+#include <mcp3004.h>
 #include "main.h"
 
 /*
@@ -22,6 +23,9 @@ PI_THREAD( readTemperature) {
 	for (;;) {
 		// Notify the computation task of data available (use a message queue, for example)
 		// Do nothing until the next reading
+		int value = analogRead(BASE);
+		printf("val: %d\n", value);
+		delay(100);
 	}
 }
 
@@ -32,7 +36,7 @@ void setup(void) {
 	// initialise the hardware
 	// initialize variables
 	// Initialize the communications from the thermistor task
-
+	mcp3004Setup(BASE, CHANNEL);
 	wiringPiSetupSys(); // Setup wiringPi
 	piThreadCreate(readTemperature); // Start Thermistor reading task
 }
@@ -45,6 +49,8 @@ int main(void) {
 	setup();
 
 	for (;;) {
+		//printf("getting data..");
+		delay(1000);
 		// Receive the data reading from the thermistor reading task when available
 		// Compute a running average of the raw data
 		// Convert the raw data into temperature units, centegrade and farenheit
