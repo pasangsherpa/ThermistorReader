@@ -45,7 +45,14 @@ PI_THREAD( readTemperature) {
 		//int  temp_second =  first_byte & 0x0F;
 		//printf("lsb_read: %d\n", lsb_read);
 		//int temp_result = (msb_read << 4) | (lsb_read >> 4);
-		int temp_result = msb_read >> 4;
+		int sign = msb_read & 0x8000;
+		int temp_result = 0;
+		if (sign) {
+
+		} else {
+			msb_read = msb_read & 0x7FFF;
+			temp_result = msb_read >> 4;
+		}
 		printf("temp: %d\n", temp_result);
   		//int  third_byte =  wiringPiI2CReadReg8(fd, (first_byte & 0x0F) | temp_second);
 		//printf("temp_second:\n ", temp_second);
