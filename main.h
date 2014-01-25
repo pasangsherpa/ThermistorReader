@@ -22,3 +22,7 @@
 #define BASE		123
 #define CHANNEL		0
 /** END A2D CONVERTER **/
+
+
+#define KEY_NUM         0
+#define ALPHA           0.3
