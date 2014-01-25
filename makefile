@@ -9,7 +9,10 @@ OBJ = $(SRC:.c=.o)
 BINS = $(SRC:.c=)
 
 run: main
-	./main
+	./main -d 0 
+
+debug: main
+	./main -d 1
 
 main: main.o
 	@echo [link]

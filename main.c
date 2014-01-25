@@ -11,11 +11,13 @@
 
 #include <pthread.h>
 #include <stdio.h>
+#include <strings.h>
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <mcp3004.h>
 #include "main.h"
 
+unsigned int DEBUG_MODE;
 unsigned int time_stamp;
 static volatile int value;	//analog value read from thermistor
 static volatile int comp_value;	//value used in computation thread
@@ -35,7 +37,7 @@ PI_THREAD( readTemperature) {
 		value = analogRead(BASE);
 		pthread_cond_signal(&value_cond);
 		pthread_mutex_unlock(&value_mutex);
-		printf("Millis: %d \n", millis() - time_stamp);		
+		if (DEBUG_MODE) printf("Millis: %d \n", millis() - time_stamp);		
 		time_stamp = millis();
 		delay(100); // Do nothing until the next reading
 	}
@@ -61,7 +63,12 @@ int convert(int x) {
 /*
  * Computation/display task
  */
-int main(void) {
+int main(int argc, char * argv[]) {
+
+	if(strcasecmp("-d", argv[1]) == 0){                        
+		DEBUG_MODE  = atoi(argv[2]); // set debug mode 
+        }
+
 	setup();
 
 	for (;;) {
