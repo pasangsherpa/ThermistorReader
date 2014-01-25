@@ -82,7 +82,7 @@ int main(int argc, char * argv[]) {
 			// Convert the raw data into temperature units, centegrade and farenheit
                		int temp_c = convert(Tavg_new);
                 	int temp_f = (temp_c * 9)/5 + 32;
-                	printf("The current temperature is %d Fahrenheit which equals %d in Celcius\n\n", temp_f, temp_c); 
+                	printf("Current temperature is %d °F | %d °C\n\n", temp_f, temp_c); 
         	}
 	}
 	return NO_ERROR;
