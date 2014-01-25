@@ -14,14 +14,14 @@
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <mcp3004.h>
-#include <queue.h>
+#include "queue.h"
 #include "main.h"
 
 unsigned int time_stamp;
 static volatile int value;	//analog value read from thermistor
 static volatile int comp_value;	//value used in computation thread
 static volatile int counter = 0;
-QueueRecord queue;
+Queue queue;
 
 
 #define KEY_NUM 	0

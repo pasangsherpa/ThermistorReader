@@ -4,16 +4,16 @@ INCLUDE = -I/usr/local/include
 CFLAGS = $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
 LDFLAGS = -L/usr/local/lib
 LDLIBS = -lwiringPi -lpthread -lm
-SRC = main.c
+SRC = main.c queue.c
 OBJ = $(SRC:.c=.o)
 BINS = $(SRC:.c=)
 
 run: main
 	./main
 
-main: main.o
+main: main.o queue.o
 	@echo [link]
-	@$(CC) -o $@ main.o $(LDFLAGS) $(LDLIBS)
+	@$(CC) -o $@ main.o queue.o $(LDFLAGS) $(LDLIBS)
 	
 .c.o:
 	@echo [CC] $<
