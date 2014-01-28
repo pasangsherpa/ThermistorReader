@@ -25,4 +25,4 @@
 
 
 #define KEY_NUM         0
-#define ALPHA           0.3
+#define ALPHA           0.25
