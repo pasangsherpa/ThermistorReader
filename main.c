@@ -56,7 +56,7 @@ void setup(void) {
 /*
  *Convert Digital Value to degree Celcius
  */
-int convert(int x) {
+float convert(int x) {
 	return (0.00000000137695*x*x*x*x) - (0.00000289965*x*x*x) + (0.00219812*x*x) - (0.615599*x) + 58.395;
 }
 
@@ -77,12 +77,12 @@ int main(int argc, char * argv[]) {
 	        comp_value =  value;
        		pthread_mutex_unlock(&value_mutex);
 	        //add value to average
-        	int Tavg_new = (ALPHA * comp_value) + (1 - ALPHA) * Tavg_new;
+        	float Tavg_new = (ALPHA * comp_value) + (1 - ALPHA) * Tavg_new;
 	        if (counter == 0) {
 			// Convert the raw data into temperature units, centegrade and farenheit
-               		int temp_c = convert(Tavg_new);
-                	int temp_f = (temp_c * 9)/5 + 32;
-                	printf("Current temperature is %d °F | %d °C\n\n", temp_f, temp_c); 
+               		float temp_c = convert(Tavg_new);
+                	float temp_f = (temp_c * 9)/5 + 32;
+                	printf("Current temperature is %6.3f °F | %6.3f °C\n\n", temp_f, temp_c); 
         	}
 	}
 	return NO_ERROR;
