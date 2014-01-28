@@ -33,11 +33,11 @@ pthread_cond_t value_cond;
 PI_THREAD( readTemperature) {
 	//Set up the task to sample the A-to-D converter input every 10th second.
 	for (;;) {
-		pthread_mutex_lock(&value_mutex);		
+		if (DEBUG_MODE) printf("Millis: %d \n", millis() - time_stamp);
+		pthread_mutex_lock(&value_mutex);
 		value = analogRead(BASE);
 		pthread_cond_signal(&value_cond);
 		pthread_mutex_unlock(&value_mutex);
-		if (DEBUG_MODE) printf("Millis: %d \n", millis() - time_stamp);		
 		time_stamp = millis();
 		delay(100); // Do nothing until the next reading
 	}
@@ -49,8 +49,8 @@ PI_THREAD( readTemperature) {
 void setup(void) {
 	mcp3004Setup(BASE, CHANNEL); // Setup SPI
 	wiringPiSetupSys(); // Setup wiringPi
-	piThreadCreate(readTemperature); // Start Thermistor reading task
 	time_stamp = millis();
+	piThreadCreate(readTemperature); // Start Thermistor reading task
 }
 
 /*
@@ -65,8 +65,8 @@ float convert(int x) {
  */
 int main(int argc, char * argv[]) {
 
-	if(strcasecmp("-d", argv[1]) == 0){                        
-		DEBUG_MODE  = atoi(argv[2]); // set debug mode 
+	if(strcasecmp("-d", argv[1]) == 0){
+		DEBUG_MODE  = atoi(argv[2]); // set debug mode
         }
 
 	setup();
@@ -82,7 +82,7 @@ int main(int argc, char * argv[]) {
 			// Convert the raw data into temperature units, centegrade and farenheit
                		float temp_c = convert(Tavg_new);
                 	float temp_f = (temp_c * 9)/5 + 32;
-                	printf("Current temperature is %6.3f °F | %6.3f °C\n\n", temp_f, temp_c); 
+                	printf("Current temperature is %6.3f °F | %6.3f °C\n\n", temp_f, temp_c);
         	}
 	}
 	return NO_ERROR;
